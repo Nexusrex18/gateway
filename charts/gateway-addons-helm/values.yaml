@@ -84,67 +84,68 @@ prometheus:
                     type: Info
                     info:
                       labelsFromPath:
-                        gatewayclass_name: [ spec, gatewayClassName ]
+                        gatewayclass_name: [spec, gatewayClassName]
                 - name: "labels"
                   help: "Kubernetes labels converted to Prometheus labels."
                   each:
                     type: Info
                     info:
-                      path: [ metadata ]
+                      path: [metadata]
                       labelsFromPath:
-                        "*": [ labels ]
+                        "*": [labels]
                 - name: "created"
                   help: "created timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, creationTimestamp ]
+                      path: [metadata, creationTimestamp]
                 - name: "deleted"
                   help: "deletion timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, deletionTimestamp ]
+                      path: [metadata, deletionTimestamp]
                 - name: "listener_info"
                   help: "Gateway listener information"
                   each:
                     type: Info
                     info:
-                      path: [ spec, listeners ]
+                      path: [spec, listeners]
                       labelsFromPath:
-                        listener_name: [ "name" ]
-                        port: [ "port" ]
-                        protocol: [ "protocol" ]
-                        hostname: [ "hostname" ]
-                        tls_mode: [ "tls","mode" ]
-                        allowed_routes_namespaces_from: [ "allowedRoutes", "namespaces", "from" ]
+                        listener_name: ["name"]
+                        port: ["port"]
+                        protocol: ["protocol"]
+                        hostname: ["hostname"]
+                        tls_mode: ["tls", "mode"]
+                        allowed_routes_namespaces_from:
+                          ["allowedRoutes", "namespaces", "from"]
                 - name: "status"
                   help: "status condition"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ status, conditions ]
+                      path: [status, conditions]
                       labelsFromPath:
-                        type: [ "type" ]
-                      valueFrom: [ "status" ]
+                        type: ["type"]
+                      valueFrom: ["status"]
                 - name: "status_listener_attached_routes"
                   help: "Number of attached routes for a listener"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ status, listeners ]
+                      path: [status, listeners]
                       labelsFromPath:
-                        listener_name: [ "name" ]
-                      valueFrom: [ "attachedRoutes" ]
+                        listener_name: ["name"]
+                      valueFrom: ["attachedRoutes"]
                 - name: "status_address_info"
                   help: "Gateway address types and values"
                   each:
                     type: Info
                     info:
-                      path: [ status, addresses ]
+                      path: [status, addresses]
                       labelsFromPath:
-                        type: [ "type" ]
-                        value: [ "value" ]
+                        type: ["type"]
+                        value: ["value"]
             - groupVersionKind:
                 group: gateway.networking.k8s.io
                 kind: "GatewayClass"
@@ -161,44 +162,44 @@ prometheus:
                     type: Info
                     info:
                       labelsFromPath:
-                        controller_name: [ spec, controllerName ]
+                        controller_name: [spec, controllerName]
                 - name: "labels"
                   help: "Kubernetes labels converted to Prometheus labels."
                   each:
                     type: Info
                     info:
-                      path: [ metadata ]
+                      path: [metadata]
                       labelsFromPath:
-                        "*": [ labels ]
+                        "*": [labels]
                 - name: "created"
                   help: "created timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, creationTimestamp ]
+                      path: [metadata, creationTimestamp]
                 - name: "deleted"
                   help: "deletion timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, deletionTimestamp ]
+                      path: [metadata, deletionTimestamp]
                 - name: "status"
                   help: "status condition"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ status, conditions ]
+                      path: [status, conditions]
                       labelsFromPath:
-                        type: [ "type" ]
-                      valueFrom: [ "status" ]
+                        type: ["type"]
+                      valueFrom: ["status"]
                 - name: "status_supported_features"
                   help: "List of supported features for the GatewayClass"
                   each:
                     type: Info
                     info:
-                      path: [ status, supportedFeatures ]
+                      path: [status, supportedFeatures]
                       labelsFromPath:
-                        features: [ ]
+                        features: []
             - groupVersionKind:
                 group: gateway.networking.k8s.io
                 kind: "HTTPRoute"
@@ -217,56 +218,56 @@ prometheus:
                   each:
                     type: Info
                     info:
-                      path: [ metadata ]
+                      path: [metadata]
                       labelsFromPath:
-                        "*": [ labels ]
+                        "*": [labels]
                 - name: "created"
                   help: "created timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, creationTimestamp ]
+                      path: [metadata, creationTimestamp]
                 - name: "deleted"
                   help: "deletion timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, deletionTimestamp ]
+                      path: [metadata, deletionTimestamp]
                 - name: "hostname_info"
                   help: "Hostname information"
                   each:
                     type: Info
                     info:
-                      path: [ spec, hostnames ]
+                      path: [spec, hostnames]
                       labelsFromPath:
-                        hostname: [ ]
+                        hostname: []
                 - name: "parent_info"
                   help: "Parent references that the httproute wants to be attached to"
                   each:
                     type: Info
                     info:
-                      path: [ spec, parentRefs ]
+                      path: [spec, parentRefs]
                       labelsFromPath:
-                        parent_group: [ "group" ]
-                        parent_kind: [ "kind" ]
-                        parent_name: [ "name" ]
-                        parent_namespace: [ "namespace" ]
-                        parent_section_name: [ "sectionName" ]
-                        parent_port: [ "port" ]
+                        parent_group: ["group"]
+                        parent_kind: ["kind"]
+                        parent_name: ["name"]
+                        parent_namespace: ["namespace"]
+                        parent_section_name: ["sectionName"]
+                        parent_port: ["port"]
                 - name: "status_parent_info"
                   help: "Parent references that the httproute is attached to"
                   each:
                     type: Info
                     info:
-                      path: [ status, parents ]
+                      path: [status, parents]
                       labelsFromPath:
-                        controller_name: [ "controllerName" ]
-                        parent_group: [ "parentRef", "group" ]
-                        parent_kind: [ "parentRef", "kind" ]
-                        parent_name: [ "parentRef", "name" ]
-                        parent_namespace: [ "parentRef", "namespace" ]
-                        parent_section_name: [ "parentRef", "sectionName" ]
-                        parent_port: [ "parentRef", "port" ]
+                        controller_name: ["controllerName"]
+                        parent_group: ["parentRef", "group"]
+                        parent_kind: ["parentRef", "kind"]
+                        parent_name: ["parentRef", "name"]
+                        parent_namespace: ["parentRef", "namespace"]
+                        parent_section_name: ["parentRef", "sectionName"]
+                        parent_port: ["parentRef", "port"]
             - groupVersionKind:
                 group: gateway.networking.k8s.io
                 kind: "GRPCRoute"
@@ -285,56 +286,56 @@ prometheus:
                   each:
                     type: Info
                     info:
-                      path: [ metadata ]
+                      path: [metadata]
                       labelsFromPath:
-                        "*": [ labels ]
+                        "*": [labels]
                 - name: "created"
                   help: "created timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, creationTimestamp ]
+                      path: [metadata, creationTimestamp]
                 - name: "deleted"
                   help: "deletion timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, deletionTimestamp ]
+                      path: [metadata, deletionTimestamp]
                 - name: "hostname_info"
                   help: "Hostname information"
                   each:
                     type: Info
                     info:
-                      path: [ spec, hostnames ]
+                      path: [spec, hostnames]
                       labelsFromPath:
-                        hostname: [ ]
+                        hostname: []
                 - name: "parent_info"
                   help: "Parent references that the grpcroute wants to be attached to"
                   each:
                     type: Info
                     info:
-                      path: [ spec, parentRefs ]
+                      path: [spec, parentRefs]
                       labelsFromPath:
-                        parent_group: [ "group" ]
-                        parent_kind: [ "kind" ]
-                        parent_name: [ "name" ]
-                        parent_namespace: [ "namespace" ]
-                        parent_section_name: [ "sectionName" ]
-                        parent_port: [ "port" ]
+                        parent_group: ["group"]
+                        parent_kind: ["kind"]
+                        parent_name: ["name"]
+                        parent_namespace: ["namespace"]
+                        parent_section_name: ["sectionName"]
+                        parent_port: ["port"]
                 - name: "status_parent_info"
                   help: "Parent references that the grpcroute is attached to"
                   each:
                     type: Info
                     info:
-                      path: [ status, parents ]
+                      path: [status, parents]
                       labelsFromPath:
-                        controller_name: [ "controllerName" ]
-                        parent_group: [ "parentRef", "group" ]
-                        parent_kind: [ "parentRef", "kind" ]
-                        parent_name: [ "parentRef", "name" ]
-                        parent_namespace: [ "parentRef", "namespace" ]
-                        parent_section_name: [ "parentRef", "sectionName" ]
-                        parent_port: [ "parentRef", "port" ]
+                        controller_name: ["controllerName"]
+                        parent_group: ["parentRef", "group"]
+                        parent_kind: ["parentRef", "kind"]
+                        parent_name: ["parentRef", "name"]
+                        parent_namespace: ["parentRef", "namespace"]
+                        parent_section_name: ["parentRef", "sectionName"]
+                        parent_port: ["parentRef", "port"]
             - groupVersionKind:
                 group: gateway.networking.k8s.io
                 kind: "TCPRoute"
@@ -353,48 +354,48 @@ prometheus:
                   each:
                     type: Info
                     info:
-                      path: [ metadata ]
+                      path: [metadata]
                       labelsFromPath:
-                        "*": [ labels ]
+                        "*": [labels]
                 - name: "created"
                   help: "created timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, creationTimestamp ]
+                      path: [metadata, creationTimestamp]
                 - name: "deleted"
                   help: "deletion timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, deletionTimestamp ]
+                      path: [metadata, deletionTimestamp]
                 - name: "parent_info"
                   help: "Parent references that the tcproute wants to be attached to"
                   each:
                     type: Info
                     info:
-                      path: [ spec, parentRefs ]
+                      path: [spec, parentRefs]
                       labelsFromPath:
-                        parent_group: [ "group" ]
-                        parent_kind: [ "kind" ]
-                        parent_name: [ "name" ]
-                        parent_namespace: [ "namespace" ]
-                        parent_section_name: [ "sectionName" ]
-                        parent_port: [ "port" ]
+                        parent_group: ["group"]
+                        parent_kind: ["kind"]
+                        parent_name: ["name"]
+                        parent_namespace: ["namespace"]
+                        parent_section_name: ["sectionName"]
+                        parent_port: ["port"]
                 - name: "status_parent_info"
                   help: "Parent references that the tcproute is attached to"
                   each:
                     type: Info
                     info:
-                      path: [ status, parents ]
+                      path: [status, parents]
                       labelsFromPath:
-                        controller_name: [ "controllerName" ]
-                        parent_group: [ "parentRef", "group" ]
-                        parent_kind: [ "parentRef", "kind" ]
-                        parent_name: [ "parentRef", "name" ]
-                        parent_namespace: [ "parentRef", "namespace" ]
-                        parent_section_name: [ "parentRef", "sectionName" ]
-                        parent_port: [ "parentRef", "port" ]
+                        controller_name: ["controllerName"]
+                        parent_group: ["parentRef", "group"]
+                        parent_kind: ["parentRef", "kind"]
+                        parent_name: ["parentRef", "name"]
+                        parent_namespace: ["parentRef", "namespace"]
+                        parent_section_name: ["parentRef", "sectionName"]
+                        parent_port: ["parentRef", "port"]
             - groupVersionKind:
                 group: gateway.networking.k8s.io
                 kind: "TLSRoute"
@@ -413,56 +414,56 @@ prometheus:
                   each:
                     type: Info
                     info:
-                      path: [ metadata ]
+                      path: [metadata]
                       labelsFromPath:
-                        "*": [ labels ]
+                        "*": [labels]
                 - name: "created"
                   help: "created timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, creationTimestamp ]
+                      path: [metadata, creationTimestamp]
                 - name: "deleted"
                   help: "deletion timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, deletionTimestamp ]
+                      path: [metadata, deletionTimestamp]
                 - name: "hostname_info"
                   help: "Hostname information"
                   each:
                     type: Info
                     info:
-                      path: [ spec, hostnames ]
+                      path: [spec, hostnames]
                       labelsFromPath:
-                        hostname: [ ]
+                        hostname: []
                 - name: "parent_info"
                   help: "Parent references that the tlsroute wants to be attached to"
                   each:
                     type: Info
                     info:
-                      path: [ spec, parentRefs ]
+                      path: [spec, parentRefs]
                       labelsFromPath:
-                        parent_group: [ "group" ]
-                        parent_kind: [ "kind" ]
-                        parent_name: [ "name" ]
-                        parent_namespace: [ "namespace" ]
-                        parent_section_name: [ "sectionName" ]
-                        parent_port: [ "port" ]
+                        parent_group: ["group"]
+                        parent_kind: ["kind"]
+                        parent_name: ["name"]
+                        parent_namespace: ["namespace"]
+                        parent_section_name: ["sectionName"]
+                        parent_port: ["port"]
                 - name: "status_parent_info"
                   help: "Parent references that the tlsroute is attached to"
                   each:
                     type: Info
                     info:
-                      path: [ status, parents ]
+                      path: [status, parents]
                       labelsFromPath:
-                        controller_name: [ "controllerName" ]
-                        parent_group: [ "parentRef", "group" ]
-                        parent_kind: [ "parentRef", "kind" ]
-                        parent_name: [ "parentRef", "name" ]
-                        parent_namespace: [ "parentRef", "namespace" ]
-                        parent_section_name: [ "parentRef", "sectionName" ]
-                        parent_port: [ "parentRef", "port" ]
+                        controller_name: ["controllerName"]
+                        parent_group: ["parentRef", "group"]
+                        parent_kind: ["parentRef", "kind"]
+                        parent_name: ["parentRef", "name"]
+                        parent_namespace: ["parentRef", "namespace"]
+                        parent_section_name: ["parentRef", "sectionName"]
+                        parent_port: ["parentRef", "port"]
             - groupVersionKind:
                 group: gateway.networking.k8s.io
                 kind: "UDPRoute"
@@ -481,48 +482,48 @@ prometheus:
                   each:
                     type: Info
                     info:
-                      path: [ metadata ]
+                      path: [metadata]
                       labelsFromPath:
-                        "*": [ labels ]
+                        "*": [labels]
                 - name: "created"
                   help: "created timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, creationTimestamp ]
+                      path: [metadata, creationTimestamp]
                 - name: "deleted"
                   help: "deletion timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, deletionTimestamp ]
+                      path: [metadata, deletionTimestamp]
                 - name: "parent_info"
                   help: "Parent references that the udproute wants to be attached to"
                   each:
                     type: Info
                     info:
-                      path: [ spec, parentRefs ]
+                      path: [spec, parentRefs]
                       labelsFromPath:
-                        parent_group: [ "group" ]
-                        parent_kind: [ "kind" ]
-                        parent_name: [ "name" ]
-                        parent_namespace: [ "namespace" ]
-                        parent_section_name: [ "sectionName" ]
-                        parent_port: [ "port" ]
+                        parent_group: ["group"]
+                        parent_kind: ["kind"]
+                        parent_name: ["name"]
+                        parent_namespace: ["namespace"]
+                        parent_section_name: ["sectionName"]
+                        parent_port: ["port"]
                 - name: "status_parent_info"
                   help: "Parent references that the udproute is attached to"
                   each:
                     type: Info
                     info:
-                      path: [ status, parents ]
+                      path: [status, parents]
                       labelsFromPath:
-                        controller_name: [ "controllerName" ]
-                        parent_group: [ "parentRef", "group" ]
-                        parent_kind: [ "parentRef", "kind" ]
-                        parent_name: [ "parentRef", "name" ]
-                        parent_namespace: [ "parentRef", "namespace" ]
-                        parent_section_name: [ "parentRef", "sectionName" ]
-                        parent_port: [ "parentRef", "port" ]
+                        controller_name: ["controllerName"]
+                        parent_group: ["parentRef", "group"]
+                        parent_kind: ["parentRef", "kind"]
+                        parent_name: ["parentRef", "name"]
+                        parent_namespace: ["parentRef", "namespace"]
+                        parent_section_name: ["parentRef", "sectionName"]
+                        parent_port: ["parentRef", "port"]
             - groupVersionKind:
                 group: gateway.networking.k8s.io
                 kind: "BackendTLSPolicy"
@@ -541,32 +542,32 @@ prometheus:
                   each:
                     type: Info
                     info:
-                      path: [ metadata ]
+                      path: [metadata]
                       labelsFromPath:
-                        "*": [ labels ]
+                        "*": [labels]
                 - name: "created"
                   help: "created timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, creationTimestamp ]
+                      path: [metadata, creationTimestamp]
                 - name: "deleted"
                   help: "deletion timestamp"
                   each:
                     type: Gauge
                     gauge:
-                      path: [ metadata, deletionTimestamp ]
+                      path: [metadata, deletionTimestamp]
                 - name: "target_info"
                   help: "Target references that the backendtlspolicy wants to be attached to"
                   each:
                     type: Info
                     info:
-                      path: [ spec, targetRef ]
+                      path: [spec, targetRef]
                       labelsFromPath:
-                        target_group: [ "group" ]
-                        target_kind: [ "kind" ]
-                        target_name: [ "name" ]
-                        target_namespace: [ "namespace" ]
+                        target_group: ["group"]
+                        target_kind: ["kind"]
+                        target_name: ["name"]
+                        target_namespace: ["namespace"]
     rbac:
       extraRules:
         - apiGroups:
@@ -837,6 +838,11 @@ opentelemetry-collector:
       hostPort: 8126
       protocol: TCP
   fullnameOverride: otel-collector
+  # Enable kubernetesAttributes preset to ensure RBAC is created
+  # when the collector is enabled (required for k8s discovery)
+  presets:
+    kubernetesAttributes:
+      enabled: true
   mode: deployment
   image:
     repository: "otel/opentelemetry-collector-contrib"
